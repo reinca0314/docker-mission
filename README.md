@@ -23,7 +23,7 @@
 
 ## 3. 수행 로그 (Terminal Operations)
 
-### 3.1 디렉토리 및 파일 관리
+## 3.1 디렉토리 및 파일 관리
 ```bash
 asas69876975$ pwd
 /Users/asas69876975/my-mission
@@ -35,64 +35,86 @@ drwxr-xr-x   4 asas69876975  staff   128  3 31 17:30 .
 drwxr-xr-x  10 asas69876975  staff   320  3 31 17:25 ..
 -rw-r--r--   1 asas69876975  staff    56  3 31 17:30 Dockerfile
 drwxr-xr-x   3 asas69876975  staff    96  3 31 17:28 app
+```
 
-권한 변경 실습
-# 파일 권한 변경 (644 -> 600)
+## 3.2 권한 변경 실습
+
+### 파일 권한 변경 (644 -> 600)
+```bash
 asas69876975$ touch permission_test.txt
 asas69876975$ ls -l permission_test.txt
 -rw-r--r--  1 asas69876975  staff  0  3 31 17:35 permission_test.txt
 asas69876975$ chmod 600 permission_test.txt
 asas69876975$ ls -l permission_test.txt
 -rw-------  1 asas69876975  staff  0  3 31 17:35 permission_test.txt
+```
 
-# 디렉토리 권한 변경 (755 -> 700)
+### 디렉토리 권한 변경 (755 -> 700)
+```bash
 asas69876975$ mkdir permission_dir
 asas69876975$ chmod 700 permission_dir
 asas69876975$ ls -ld permission_dir
 drwx------  2 asas69876975  staff  64  3 31 17:36 permission_dir
+```
 
-Docker 서비스 구축 및 검증
-(1) Dockerfile 커스텀 이미지
+## 3.3 Docker 서비스 구축 및 검증
+### (1) Dockerfile 커스텀 이미지
+```bash
 FROM nginx:alpine
 LABEL org.opencontainers.image.title="my-mission-nginx"
 COPY app/ /usr/share/nginx/html/
+```
 
-(2) 포트 매핑 및 커스텀 결과 확인 (Port: 8080)
-# 이미지 빌드 및 실행
+## (2) 포트 매핑 및 커스텀 결과 확인 (Port: 8080)
+### 1. 이미지 빌드 및 실행
+```bash
 asas69876975$ docker build -t my-custom-web .
 asas69876975$ docker run -d -p 8080:80 --name mission-web my-custom-web
+```
 
-# 접속 확인 (브라우저 스크린샷 대체 가능)
+### 2. 접속 확인 (브라우저 스크린샷 대체 가능)
+```bash
 asas69876975$ curl http://localhost:8080
 <h1>Hello My Mission!</h1>
+```
 
-(3) 바인드 마운트 실시간 반영 (Port: 8081)
-# 호스트 app 폴더와 컨테이너 경로 동기화
+## (3) 바인드 마운트 실시간 반영 (Port: 8081)
+### 호스트 app 폴더와 컨테이너 경로 동기화
+```bash
 asas69876975$ docker run -d -p 8081:80 --name dev-web -v $(pwd)/app:/usr/share/nginx/html nginx:alpine
+```
 
-# 호스트 index.html 수정 후 즉시 반영 확인
+### (4) 호스트 index.html 수정 후 즉시 반영 확인
+```bash
 asas69876975$ echo "Update Test" > app/index.html
 asas69876975$ curl http://localhost:8081
 Update Test
+```
 
-(4) 볼륨 영속성 검증
-# 1. 볼륨 생성 및 데이터 저장
+## 3.4 볼륨 영속성 검증
+### (1) 볼륨 생성 및 데이터 저장
+```bash
 asas69876975$ docker volume create my-mission-data
 asas69876975$ docker run -d --name data-worker -v my-mission-data:/app/data alpine tail -f /dev/null
 asas69876975$ docker exec data-worker sh -c "echo 'This data survives' > /app/data/test.txt"
+```
 
-# 2. 컨테이너 삭제 후 재생성하여 데이터 유지 확인
+### (2) 컨테이너 삭제 후 재생성하여 데이터 유지 확인
+```bash
 asas69876975$ docker rm -f data-worker
 asas69876975$ docker run -d --name data-checker -v my-mission-data:/app/data alpine tail -f /dev/null
 asas69876975$ docker exec data-checker cat /app/data/test.txt
 This data survives
+```
 
-Git 설정 확인
+## Git 설정 확인
+```bash
 asas69876975$ git config --list
 user.name=reinca0314
 user.email=*** (개인정보 보호를 위한 마스킹)
 core.repositoryformatversion=0
 ...
+```
 
 ## 4. 트러블 슈팅 기록
 🚩 Case 1: sudo 권한 제한 및 Docker 실행 문제
