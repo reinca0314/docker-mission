@@ -24,6 +24,7 @@
 ## 3. 수행 로그 (Terminal Operations)
 
 ### 3.1 디렉토리 및 파일 관리
+```bash
 asas69876975$ pwd
 /Users/asas69876975/my-mission
 
