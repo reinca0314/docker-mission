@@ -93,3 +93,22 @@ user.name=reinca0314
 user.email=*** (개인정보 보호를 위한 마스킹)
 core.repositoryformatversion=0
 ...
+
+## 4. 트러블 슈팅 기록
+🚩 Case 1: sudo 권한 제한 및 Docker 실행 문제
+
+문제: 보안 정책상 sudo 권한 사용 제한으로 일반적인 Docker Desktop 설치 불가.
+원인 가설: 시스템 루트 권한 없이 컨테이너를 구동할 수 있는 런타임 필요.
+해결: OrbStack을 활용하여 사용자 권한 내에서 Docker 데몬을 정상 구동함.
+
+🚩 Case 2: Shell 특수문자('!') 인식 오류
+
+문제: 볼륨 데이터 입력 시 bash: !: event not found 에러 발생.
+원인 가설: 큰따옴표 내의 느낌표(!)가 쉘의 History 이벤트 지시자로 인식됨.
+해결: 텍스트에서 느낌표를 제거하거나 작은따옴표(' ')를 사용하여 리터럴 문자로 처리함.
+
+🚩 Case 3: GitHub Push (403 Forbidden) 및 인증 실패
+
+문제: git push 시 403 Forbidden 발생 및 비밀번호 입력(열쇠 모양) 시 불통.
+원인 가설: GitHub의 ID/PW 기반 인증 중단 및 로컬 키체인 정보 충돌.
+해결: VSCode의 GitHub 계정 연동 기능 및 PAT(Personal Access Token)을 사용하여 재인증 완료.
