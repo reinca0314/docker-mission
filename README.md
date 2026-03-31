@@ -35,6 +35,7 @@ drwxr-xr-x   4 asas69876975  staff   128  3 31 17:30 .
 drwxr-xr-x  10 asas69876975  staff   320  3 31 17:25 ..
 -rw-r--r--   1 asas69876975  staff    56  3 31 17:30 Dockerfile
 drwxr-xr-x   3 asas69876975  staff    96  3 31 17:28 app
+```bash
 
 권한 변경 실습
 # 파일 권한 변경 (644 -> 600)
