@@ -97,7 +97,9 @@ asas69876975$ docker exec data-checker cat /app/data/test.txt
 This data survives
 ```
 
-## Git 설정 및 저장소 연동
+---
+
+## 4. Git 설정 및 저장소 연동
 ```bash
 # Git 설정 확인
 asas69876975$ git config --list
@@ -109,7 +111,7 @@ core.repositoryformatversion=0
 
 ---
 
-## 4. 트러블 슈팅 기록
+## 5. 트러블 슈팅 기록
 🚩 Case 1: sudo 권한 제한 및 Docker 실행 문제
 
 문제: 보안 정책상 sudo 권한 사용 제한으로 일반적인 Docker Desktop 설치 불가.
