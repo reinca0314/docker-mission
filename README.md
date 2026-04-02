@@ -52,7 +52,14 @@ asas69876975$ ls -ld permission_dir
 drwx------  2 asas69876975  staff  64  3 31 17:36 permission_dir
 ```
 
-### 3.3 Docker 서비스 구축 및 검증
+### 3.3 hello-world 실행 결과 확인
+```bash
+asas69876975$ docker run hello-world
+Hello from Docker!
+This message shows that your installation appears to be working correctly.
+```
+
+### 3.4 Docker 서비스 구축 및 검증
 #### (1) Dockerfile 커스텀 이미지
 ```bash
 FROM nginx:alpine
@@ -82,7 +89,7 @@ asas69876975$ curl http://localhost:8081
 Update Test
 ```
 
-### 3.4 볼륨 영속성 검증
+### 3.5 볼륨 영속성 검증
 #### (1) 볼륨 생성 및 데이터 저장
 ```bash
 # 1. 볼륨 생성 및 데이터 쓰기
